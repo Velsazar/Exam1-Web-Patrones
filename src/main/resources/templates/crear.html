@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="css/home.css"/>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    </head> 
+    <body>
+        <div class="container">
+            <div class="card-header bg-black text-white"> </div>
+            <div class="card-body">
+                <!-------------------Esto es un Formulario--------------- -->
+                <div class="container">
+                    <form th:object = "${peli}"      
+                          th:action="@{/save}"     
+                          method="POST"          
+                          ><!--etiqueta FORM ahi mismo esta el tymeleaf:Object es el que vamos a generar,crear o manipular --><!-- accion que realiza guardar --> <!-- que tipo de metodo es  -->
+                        <input type="hidden" th:field="*{id}"> <!--INPUT Cajita de texto para que el user pueda  escribir -->
+                        <div class="form-group mb-3 row">
+                            <label  class="col-md-2 col-form-label" for="nombre">Nombre Peli</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control form-control-sm col-md-6" th:field="*{nombre}"  placeholder= "Nombre Cliente" id="nombres" aria-describedby="emailHelp">
+                            </div>    <!-- TH: indicarlo , para referir a atributo nombre . el cual vamos a guardar en objeto persona  -->
+                        </div>
+
+
+                        <div class="form-group mb-3 row">
+                            <label  class="form-control-sm col-form-label col-md-2" for="precio">Precio</label>
+                            <div class="col-sm-10">
+                                <input type="text" th:field="*{precio}" class="form-control form-control-sm col-md-6" placeholder= "precio" id="telefono" aria-describedby="emailHelp">
+                            </div>
+                        </div>
+                        <div class="form-group mb-3 row">
+                            <label  class="form-control-sm  col-form-label col-md-2" for="fecha">Fecha</label>
+                            <div class="col-sm-10">
+                                <input type="text" th:field="*{fecha}" class="form-control form-control-sm col-md-6" placeholder= "fecha" id="email" aria-describedby="emailHelp">
+                            </div>
+                        </div>
+                        <div class="form-group mb-3 row">
+                            <label  class="form-control-sm col-form-label col-md-2" for="categorias">Categoria</label>
+                            <div class="col-sm-10"> 
+                                <select  th:field="*{categoria}" class="form-control form-control-sm col-md-6" id="pais" aria-describedby="emailHelp"><!-- SELECT,dropDow, th:field , ahi indicamos que vamos a GUARDAR A Pais -->
+                                    <option th:each="x:${categorias}" 
+                                            th:value="${x.id}"  
+                                            th:text="${x.categoria}"/> <!-- yo quiero que el valor sea el X.id--> <!-- Y el texto que vaya a mostrar sea el x.pais -->
+                                </select>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary" value="Guardar">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
